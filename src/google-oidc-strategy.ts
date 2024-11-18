@@ -13,7 +13,16 @@ export const googleOpenIDConnectStrategy = new OpenIDConnectStrategy(
         callbackURL: `${process.env.BASE_API!}:${process.env.PORT!}/auth/oauth2/redirect`,
         scope: 'openid profile email',
     },
-    (issuer: string, profile: Profile, cb: (err: any, user: any) => void) => {
+    (
+        issuer: string,
+        profile: Profile,
+        cb: (
+            err: any, // eslint-disable-line  @typescript-eslint/no-explicit-any
+
+            user: Express.User,
+        ) => void,
+    ) => {
+        //
         //TODO: Implement user handling
         console.log('User Profile:', profile);
         console.log('Issuer:', issuer);
