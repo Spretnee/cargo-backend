@@ -7,13 +7,9 @@ import { errorHandler } from './middleware/error.middleware';
 
 import { initializePassport } from './config/passport.config';
 import authRoutes from './routes/auth.routes';
+import { checkRequiredEnvVars } from './utils/environmentCheck';
 
-const requiredEnvVars = ['SESSION_SECRET', 'PORT', 'BASE_API', 'REDIRECT_URL'];
-for (const envVar of requiredEnvVars) {
-    if (!process.env[envVar]) {
-        throw new Error(`Missing required environment variable: ${envVar}`);
-    }
-}
+checkRequiredEnvVars();
 
 const app = express();
 
@@ -29,11 +25,6 @@ app.use(
         secret: process.env.SESSION_SECRET || 'default-secret',
         resave: false,
         saveUninitialized: false,
-        cookie: {
-            secure: process.env.NODE_ENV === 'production',
-            httpOnly: true,
-            maxAge: 24 * 60 * 60 * 1000,
-        },
     }),
 );
 
