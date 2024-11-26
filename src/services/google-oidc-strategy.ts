@@ -18,15 +18,13 @@ export const googleOpenIDConnectStrategy = new OpenIDConnectStrategy(
         profile: Profile,
         cb: (
             err: any, // eslint-disable-line  @typescript-eslint/no-explicit-any
-
-            user: Express.User,
+            user: Profile,
         ) => void,
     ) => {
         //
         //TODO: Implement user handling
         console.log('User Profile:', profile);
         console.log('Issuer:', issuer);
-        console.log({ profile });
 
         return cb(null, profile);
     },

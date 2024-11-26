@@ -1,7 +1,3 @@
-/**
- * Checks if required environment variables are present
- * @throws Error if any required variable is missing
- */
 export function checkRequiredEnvVars(): void {
     const requiredVars = [
         'BASE_API',
@@ -14,7 +10,6 @@ export function checkRequiredEnvVars(): void {
         'CLIENT_ID',
         'CLIENT_SECRET',
         'REDIRECT_URL',
-        // Add other required vars here
     ];
 
     const missingVars = requiredVars.filter((varName) => !process.env[varName]);
